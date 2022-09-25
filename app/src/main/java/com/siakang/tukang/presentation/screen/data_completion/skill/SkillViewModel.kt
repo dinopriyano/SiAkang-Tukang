@@ -21,6 +21,8 @@ class SkillViewModel @Inject constructor(
     var categoryResponse by mutableStateOf(emptyList<Category>())
     var checkedSkill by mutableStateOf(emptyList<Category>())
 
+
+
     fun getCategory() {
         viewModelScope.launch {
             categoryUseCase.getMenu(100).collectLatest { result ->

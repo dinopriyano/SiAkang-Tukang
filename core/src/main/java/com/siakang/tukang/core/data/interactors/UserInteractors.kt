@@ -133,14 +133,23 @@ class UserInteractors(
     override suspend fun storeFile(path: String, uri: Uri): Flow<Resource<String>> {
         return callbackFlow {
             userRepository.storeFile(path, uri).addOnCompleteListener { task ->
-                trySend(
-                    if(task.isSuccessful) {
-                        Resource.Success(task.result.storage.downloadUrl.result.toString())
+                if(task.isSuccessful) {
+                    task.result.storage.downloadUrl.addOnCompleteListener { taskUri ->
+                        trySend(
+                            if(taskUri.isSuccessful) {
+                                Resource.Success(taskUri.result.toString())
+                            }
+                            else {
+                                Resource.Failure(task.exception?.localizedMessage ?: "Ups, something error!")
+                            }
+                        )
                     }
-                    else {
+                }
+                else {
+                    trySend(
                         Resource.Failure(task.exception?.localizedMessage ?: "Ups, something error!")
-                    }
-                )
+                    )
+                }
             }
             awaitClose()
         }.flowOn(Dispatchers.IO)

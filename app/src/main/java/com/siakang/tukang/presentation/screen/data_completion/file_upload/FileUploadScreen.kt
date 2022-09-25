@@ -22,11 +22,13 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberPermissionState
 import com.siakang.tukang.R
+import com.siakang.tukang.core.data.model.Resource
 import com.siakang.tukang.presentation.component.file_upload.FileUpload
 import com.siakang.tukang.presentation.component.loading_button.LoadingButton
 import com.siakang.tukang.presentation.component.title_description.TitleDescription
 import com.siakang.tukang.presentation.component.toolbar.DefaultToolbar
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.receiveAsFlow
 
 @FlowPreview
 @ExperimentalPermissionsApi
@@ -38,6 +40,7 @@ fun FileUploadScreen(
 ) {
 
     val areInputValid by viewModel.areInputsValid.collectAsState()
+    val storeProcess by viewModel.storeProcess.collectAsState(initial = Resource.Empty)
     val photoProfile by viewModel.photoProfile.collectAsState()
     val idCard by viewModel.idCard.collectAsState()
     val skck by viewModel.skck.collectAsState()
@@ -59,6 +62,15 @@ fun FileUploadScreen(
     val skckLauncher = rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()) { uri ->
         uri?.let {
             viewModel.setSkck(it)
+        }
+    }
+
+    LaunchedEffect(storeProcess) {
+        when(storeProcess) {
+            is Resource.Success -> {
+                navController.navigate("skill_list")
+            }
+            else -> Unit
         }
     }
 
@@ -152,10 +164,12 @@ fun FileUploadScreen(
                     .padding(30.dp, 40.dp, 30.dp, 30.dp)
                     .height(50.dp),
                 onClick = {
-
+                    viewModel.storePhotoProfile()
+                    viewModel.storeIdCard()
+                    viewModel.storeSkck()
                 },
                 enabled = areInputValid,
-                loading = false
+                loading = (storeProcess is Resource.Loading)
             )
         }
     }

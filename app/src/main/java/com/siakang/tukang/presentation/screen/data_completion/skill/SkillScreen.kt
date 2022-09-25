@@ -92,7 +92,7 @@ fun SkillScreen(
                     onClick = {
                         navController.navigate("bank_info")
                     },
-                    enabled = true,
+                    enabled = checkedSkill.isNotEmpty(),
                     loading = false
                 )
             }
