@@ -7,19 +7,12 @@ import androidx.activity.viewModels
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.lifecycle.lifecycleScope
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
@@ -37,9 +30,9 @@ import com.siakang.tukang.presentation.screen.register_success.SuccessRegisterSc
 import com.siakang.tukang.presentation.screen.registration_detail.RegistrationDetailScreen
 import com.siakang.tukang.presentation.theme.SiAkangTukangTheme
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.FlowPreview
 
+@FlowPreview
 @ExperimentalPermissionsApi
 @ExperimentalMaterial3Api
 @ExperimentalMaterialNavigationApi
@@ -126,7 +119,7 @@ class MainActivity : ComponentActivity() {
                             slideOutOfContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(300))
                         }
                     ) {
-                        DashboardScreen(navController = navController)
+                        DashboardScreen()
                     }
                     composable(
                         route = "personal_information",

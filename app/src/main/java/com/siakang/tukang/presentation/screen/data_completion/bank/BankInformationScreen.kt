@@ -85,7 +85,7 @@ fun BankInformationScreen(
                 },
                 onValueChange = viewModel::onBankCodeEntered,
                 keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
+                    keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Next
                 )
             )

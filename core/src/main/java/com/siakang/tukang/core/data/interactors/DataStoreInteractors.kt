@@ -11,6 +11,10 @@ class DataStoreInteractors(
         return dataStoreRepository.getUid()
     }
 
+    override suspend fun getAreDataComplete(): Flow<Boolean> {
+        return dataStoreRepository.getAreDataComplete()
+    }
+
     override suspend fun storeUid(userId: String) {
         dataStoreRepository.storeUid(userId)
     }

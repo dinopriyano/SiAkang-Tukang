@@ -47,8 +47,11 @@ class MainViewModel @Inject constructor(
                 when(it) {
                     is Resource.Success -> {
                         it.value?.let { tukang ->
-                            if(tukang.areDataComplete) {
+                            if(tukang.areDataComplete && tukang.status) {
                                 _destination.trySend("dashboard")
+                            }
+                            else if(tukang.areDataComplete && !tukang.status) {
+                                _destination.trySend("pending_verification")
                             }
                             else {
                                 _destination.trySend("personal_information")

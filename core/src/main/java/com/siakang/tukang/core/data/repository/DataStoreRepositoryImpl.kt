@@ -9,6 +9,10 @@ class DataStoreRepositoryImpl(private val appDataStore: AppDataStore): DataStore
         return appDataStore.Uid
     }
 
+    override suspend fun getAreDataComplete(): Flow<Boolean> {
+        return appDataStore.areDataComplete
+    }
+
     override suspend fun storeUid(userId: String) {
         appDataStore.storeData(AppDataStore.UID, userId)
     }
