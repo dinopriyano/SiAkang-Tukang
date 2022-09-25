@@ -39,4 +39,25 @@ object InputValidator {
         }
     }
 
+    fun getBankCodeErrorIdOrNull(input: String): String? {
+        return when {
+            !input.isValidBankCode() -> "Format kode bank tidak valid"
+            else -> null
+        }
+    }
+
+    fun getBankNumberErrorIdOrNull(input: String): String? {
+        return when {
+            !input.isValidBankNumber() -> "Format nomor rekening tidak valid"
+            else -> null
+        }
+    }
+
+    fun getOwnerNameErrorIdOrNull(input: String): String? {
+        return when {
+            !input.isValidName() -> "Nama setidaknya 3 karakter"
+            else -> null
+        }
+    }
+
 }

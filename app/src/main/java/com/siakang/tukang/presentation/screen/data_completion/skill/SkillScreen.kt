@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.siakang.tukang.R
+import com.siakang.tukang.core.data.model.Resource
 import com.siakang.tukang.presentation.component.check_box.LabelledCheckbox
 import com.siakang.tukang.presentation.component.grid.gridItems
 import com.siakang.tukang.presentation.component.loading_button.LoadingButton
@@ -31,7 +32,16 @@ fun SkillScreen(
     viewModel.getCategory()
     val categories = viewModel.categoryResponse
     val checkedSkill = viewModel.checkedSkill
-    val context = LocalContext.current
+    val storeSkillResponse by viewModel.storeSkillResponse.collectAsState(initial = Resource.Empty)
+
+    LaunchedEffect(storeSkillResponse) {
+        when(storeSkillResponse) {
+            is Resource.Success -> {
+                navController.navigate("bank_info")
+            }
+            else -> Unit
+        }
+    }
 
     Scaffold(
         modifier = Modifier
@@ -90,10 +100,10 @@ fun SkillScreen(
                         .padding(30.dp, 40.dp, 30.dp, 30.dp)
                         .height(50.dp),
                     onClick = {
-                        navController.navigate("bank_info")
+                        viewModel.storeSkill()
                     },
                     enabled = checkedSkill.isNotEmpty(),
-                    loading = false
+                    loading = storeSkillResponse is Resource.Loading
                 )
             }
         }

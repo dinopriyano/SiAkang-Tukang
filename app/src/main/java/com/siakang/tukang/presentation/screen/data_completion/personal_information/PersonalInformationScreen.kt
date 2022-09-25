@@ -114,7 +114,7 @@ fun PersonalInformationScreen(
                 },
                 onValueChange = viewModel::onPhoneEntered,
                 keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Text,
+                    keyboardType = KeyboardType.Phone,
                     imeAction = ImeAction.Next
                 )
             )
@@ -136,7 +136,7 @@ fun PersonalInformationScreen(
                 },
                 onValueChange = viewModel::onEmergencyPhoneEntered,
                 keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Text,
+                    keyboardType = KeyboardType.Phone,
                     imeAction = ImeAction.Next
                 )
             )

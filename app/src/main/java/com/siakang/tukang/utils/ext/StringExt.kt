@@ -40,3 +40,11 @@ fun String.getFirstName(): String {
 fun String.isValidConfirmPassword(password: String): Boolean {
     return this == password
 }
+
+fun String.isValidBankCode(): Boolean {
+    return this.length >= 3 && this.all { it.isDigit() }
+}
+
+fun String.isValidBankNumber(): Boolean {
+    return this.length >= 5 && this.all { it.isDigit() }
+}
