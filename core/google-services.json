@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "714540230841",
+    "project_id": "siakang-eed51",
+    "storage_bucket": "siakang-eed51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714540230841:android:c74be69ac23f01a76fd368",
+        "android_client_info": {
+          "package_name": "com.siakang.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714540230841-fpk225dmnksju9i3ftkbd2aoe301gkof.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDK71FOxzGqfLCzd4jG1oAG-gkeDO39gPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "714540230841-fpk225dmnksju9i3ftkbd2aoe301gkof.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714540230841:android:d734db5135faf1ad6fd368",
+        "android_client_info": {
+          "package_name": "com.siakang.tukang.core"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714540230841-fpk225dmnksju9i3ftkbd2aoe301gkof.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDK71FOxzGqfLCzd4jG1oAG-gkeDO39gPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "714540230841-fpk225dmnksju9i3ftkbd2aoe301gkof.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
