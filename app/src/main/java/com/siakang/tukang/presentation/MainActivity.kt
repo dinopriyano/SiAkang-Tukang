@@ -17,6 +17,7 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
+import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.siakang.tukang.presentation.screen.dashboard.DashboardScreen
 import com.siakang.tukang.presentation.screen.data_completion.bank.BankInformationScreen
@@ -32,6 +33,7 @@ import com.siakang.tukang.presentation.theme.SiAkangTukangTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.FlowPreview
 
+@ExperimentalPagerApi
 @FlowPreview
 @ExperimentalPermissionsApi
 @ExperimentalMaterial3Api

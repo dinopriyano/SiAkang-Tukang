@@ -17,3 +17,7 @@ annotation class CategoryReference
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class ProductReference
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class OrderReference

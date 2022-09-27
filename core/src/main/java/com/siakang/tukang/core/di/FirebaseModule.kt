@@ -8,6 +8,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import com.siakang.tukang.core.di.qualifier.CategoryReference
+import com.siakang.tukang.core.di.qualifier.OrderReference
 import com.siakang.tukang.core.di.qualifier.ProductReference
 import com.siakang.tukang.core.di.qualifier.UserReference
 import dagger.Module
@@ -62,5 +63,12 @@ object FirebaseModule {
     fun provideProductReference(
         db: FirebaseFirestore
     ) = db.collection("product")
+
+    @Singleton
+    @Provides
+    @OrderReference
+    fun provideOrderReference(
+        db: FirebaseFirestore
+    ) = db.collection("order")
 
 }

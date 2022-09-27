@@ -3,7 +3,6 @@ package com.siakang.tukang.core.data.source.local
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -24,7 +23,7 @@ class AppDataStore @Inject constructor(private val context: Context) {
     suspend fun clear() {
         context.dataStore.edit { preferences ->
             preferences.remove(UID)
-            preferences.remove(ARE_DATA_COMPLETE)
+            preferences.remove(SKILLS)
         }
     }
 
@@ -33,16 +32,16 @@ class AppDataStore @Inject constructor(private val context: Context) {
             preferences[UID] ?: ""
         }
 
-    val areDataComplete: Flow<Boolean>
+    val skills: Flow<List<String>>
         get() = context.dataStore.data.map { preferences ->
-            preferences[ARE_DATA_COMPLETE] ?: false
+            (preferences[SKILLS] ?: "").split(",")
         }
 
 
 
     companion object {
         val UID = stringPreferencesKey("UID")
-        val ARE_DATA_COMPLETE = booleanPreferencesKey("ARE_DATA_COMPLETE")
+        val SKILLS = stringPreferencesKey("SKILLS")
         private const val DATASTORE_FILE = "siakang-tukang.pb"
     }
 

@@ -6,10 +6,12 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.google.accompanist.pager.ExperimentalPagerApi
 import com.siakang.tukang.presentation.screen.dashboard.chat.ChatScreen
 import com.siakang.tukang.presentation.screen.dashboard.home.HomeScreen
 import com.siakang.tukang.presentation.screen.dashboard.profile.ProfileScreen
 
+@ExperimentalPagerApi
 @ExperimentalMaterial3Api
 @ExperimentalAnimationApi
 @Composable
@@ -20,19 +22,19 @@ fun DashboardScreenController(
         composable(
             route = "home"
         ) {
-            HomeScreen()
+            HomeScreen(navController)
         }
 
         composable(
             route = "chat"
         ) {
-            ChatScreen()
+            ChatScreen(navController)
         }
 
         composable(
             route = "profile"
         ) {
-            ProfileScreen()
+            ProfileScreen(navController)
         }
     }
 }

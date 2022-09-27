@@ -42,7 +42,7 @@ fun String.isValidConfirmPassword(password: String): Boolean {
 }
 
 fun String.isValidBankCode(): Boolean {
-    return this.length >= 3 && this.all { it.isDigit() }
+    return this.length >= 3 && this.all { it.isLetter() }
 }
 
 fun String.isValidBankNumber(): Boolean {

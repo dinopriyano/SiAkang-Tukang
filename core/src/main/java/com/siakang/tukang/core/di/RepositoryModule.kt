@@ -6,6 +6,7 @@ import com.google.firebase.storage.StorageReference
 import com.siakang.tukang.core.data.repository.*
 import com.siakang.tukang.core.data.source.local.AppDataStore
 import com.siakang.tukang.core.di.qualifier.CategoryReference
+import com.siakang.tukang.core.di.qualifier.OrderReference
 import com.siakang.tukang.core.di.qualifier.ProductReference
 import com.siakang.tukang.core.di.qualifier.UserReference
 import com.siakang.tukang.core.domain.repository.*
@@ -48,6 +49,12 @@ object RepositoryModule {
     @Provides
     fun provideProductRepository(@ProductReference ref: CollectionReference): ProductRepository {
         return ProductRepositoryImpl(ref)
+    }
+
+    @Singleton
+    @Provides
+    fun provideOrderRepository(@OrderReference ref: CollectionReference): OrderRepository {
+        return OrderRepositoryImpl(ref)
     }
 
 }

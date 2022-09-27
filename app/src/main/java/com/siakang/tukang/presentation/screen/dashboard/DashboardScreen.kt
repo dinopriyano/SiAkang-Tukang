@@ -21,9 +21,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.pager.ExperimentalPagerApi
 import com.siakang.tukang.presentation.screen.dashboard.Screens.Items.items
 import com.siakang.tukang.presentation.theme.Primary
 
+@ExperimentalPagerApi
 @ExperimentalAnimationApi
 @ExperimentalMaterial3Api
 @Composable

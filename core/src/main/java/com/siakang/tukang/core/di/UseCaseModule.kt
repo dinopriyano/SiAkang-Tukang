@@ -43,4 +43,10 @@ object UseCaseModule {
         return ProductInteractors(repository)
     }
 
+    @Singleton
+    @Provides
+    fun provideOrderUseCase(repository: OrderRepository): OrderUseCase {
+        return OrderInteractors(repository)
+    }
+
 }
