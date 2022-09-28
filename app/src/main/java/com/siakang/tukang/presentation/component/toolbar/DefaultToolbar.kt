@@ -20,6 +20,7 @@ import com.siakang.tukang.presentation.theme.Dark
 fun DefaultToolbar(
     title: String,
     navController: NavHostController,
+    hideBackArrow: Boolean = false
 ) {
     CenterAlignedTopAppBar(
         modifier = Modifier.fillMaxWidth(),
@@ -39,7 +40,7 @@ fun DefaultToolbar(
             )
         },
         navigationIcon = {
-            if (navController.previousBackStackEntry != null) {
+            if (navController.previousBackStackEntry != null && !hideBackArrow) {
                 IconButton(onClick = { navController.navigateUp() }) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_back),

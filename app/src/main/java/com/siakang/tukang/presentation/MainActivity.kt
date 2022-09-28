@@ -19,12 +19,14 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.siakang.tukang.presentation.screen.chat.ChatScreen
 import com.siakang.tukang.presentation.screen.dashboard.DashboardScreen
 import com.siakang.tukang.presentation.screen.data_completion.bank.BankInformationScreen
 import com.siakang.tukang.presentation.screen.data_completion.file_upload.FileUploadScreen
 import com.siakang.tukang.presentation.screen.data_completion.personal_information.PersonalInformationScreen
 import com.siakang.tukang.presentation.screen.data_completion.skill.SkillScreen
 import com.siakang.tukang.presentation.screen.login.LoginScreen
+import com.siakang.tukang.presentation.screen.order_detail.OfferDetailScreen
 import com.siakang.tukang.presentation.screen.pending_verification.PendingVerificationScreen
 import com.siakang.tukang.presentation.screen.register.RegisterScreen
 import com.siakang.tukang.presentation.screen.register_success.SuccessRegisterScreen
@@ -121,7 +123,7 @@ class MainActivity : ComponentActivity() {
                             slideOutOfContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(300))
                         }
                     ) {
-                        DashboardScreen()
+                        DashboardScreen(navController)
                     }
                     composable(
                         route = "personal_information",
@@ -225,21 +227,42 @@ class MainActivity : ComponentActivity() {
                     ) {
                         RegistrationDetailScreen(navController = navController)
                     }
+                    composable(
+                        route = "offer_detail/{orderId}",
+                        enterTransition = {
+                            slideIntoContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(300))
+                        },
+                        exitTransition = {
+                            slideOutOfContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(300))
+                        },
+                        popEnterTransition = {
+                            slideIntoContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(300))
+                        },
+                        popExitTransition = {
+                            slideOutOfContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(300))
+                        }
+                    ) { backStackEntry ->
+                        OfferDetailScreen(navController, backStackEntry.arguments?.getString("orderId"))
+                    }
+                    composable(
+                        route = "chat_detail/{friendId}",
+                        enterTransition = {
+                            slideIntoContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(300))
+                        },
+                        exitTransition = {
+                            slideOutOfContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(300))
+                        },
+                        popEnterTransition = {
+                            slideIntoContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(300))
+                        },
+                        popExitTransition = {
+                            slideOutOfContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(300))
+                        }
+                    ) { backStackEntry ->
+                        ChatScreen(navController, backStackEntry.arguments?.getString("friendId"))
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    SiAkangTukangTheme {
-        Greeting("Android")
     }
 }

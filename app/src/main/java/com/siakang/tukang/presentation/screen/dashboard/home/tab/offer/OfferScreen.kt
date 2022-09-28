@@ -1,6 +1,5 @@
 package com.siakang.tukang.presentation.screen.dashboard.home.tab.offer
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,7 +19,7 @@ import com.siakang.tukang.presentation.screen.dashboard.home.HomeViewModel
 
 @Composable
 fun OfferScreen(
-    navController: NavHostController,
+    parentNavController: NavHostController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
 
@@ -31,7 +30,6 @@ fun OfferScreen(
     }
 
     LaunchedEffect(orderResponse) {
-        Log.i("kontol", "OfferScreen: $orderResponse")
         when (orderResponse) {
             is Resource.Success -> {
                 orders = (orderResponse as Resource.Success).value
@@ -53,7 +51,7 @@ fun OfferScreen(
                     .padding(top = 20.dp),
                 order = order
             ) { order ->
-
+                parentNavController.navigate("offer_detail/${order.id}")
             }
         }
     }

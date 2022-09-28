@@ -15,6 +15,7 @@ data class Order(
     val subCategory: String = "",
     val userId: String = "",
     val userName: String = "",
-    val tukangId: String = "",
-    val tukangName: String = ""
+    val tukangId: String? = null,
+    val tukangName: String = "",
+    val complete: Boolean = false
 )

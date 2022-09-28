@@ -9,8 +9,8 @@ import com.siakang.tukang.presentation.screen.dashboard.home.TabItem
 
 @ExperimentalPagerApi
 @Composable
-fun TabsContent(tabs: List<TabItem>, pagerState: PagerState, navController: NavHostController) {
+fun TabsContent(tabs: List<TabItem>, pagerState: PagerState, parentNavController: NavHostController) {
     HorizontalPager(state = pagerState, count = tabs.size) { page ->
-        tabs[page].screen(navController)
+        tabs[page].screen(parentNavController)
     }
 }

@@ -29,7 +29,9 @@ import com.siakang.tukang.presentation.theme.Primary
 @ExperimentalAnimationApi
 @ExperimentalMaterial3Api
 @Composable
-fun DashboardScreen() {
+fun DashboardScreen(
+    parentNavController: NavHostController
+) {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = {
@@ -73,7 +75,7 @@ fun DashboardScreen() {
         }
     ) { padding ->
         Box(modifier = Modifier.padding(padding)) {
-            DashboardScreenController(navController = navController)
+            DashboardScreenController(navController = navController, parentNavController = parentNavController)
         }
     }
 }

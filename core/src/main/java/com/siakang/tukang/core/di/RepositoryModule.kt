@@ -5,10 +5,7 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.storage.StorageReference
 import com.siakang.tukang.core.data.repository.*
 import com.siakang.tukang.core.data.source.local.AppDataStore
-import com.siakang.tukang.core.di.qualifier.CategoryReference
-import com.siakang.tukang.core.di.qualifier.OrderReference
-import com.siakang.tukang.core.di.qualifier.ProductReference
-import com.siakang.tukang.core.di.qualifier.UserReference
+import com.siakang.tukang.core.di.qualifier.*
 import com.siakang.tukang.core.domain.repository.*
 import dagger.Module
 import dagger.Provides
@@ -55,6 +52,18 @@ object RepositoryModule {
     @Provides
     fun provideOrderRepository(@OrderReference ref: CollectionReference): OrderRepository {
         return OrderRepositoryImpl(ref)
+    }
+
+    @Singleton
+    @Provides
+    fun provideChatRepository(@ChatReference chatRef: CollectionReference, @WhoChatReference whoChatRef: CollectionReference): ChatRepository {
+        return ChatRepositoryImpl(chatRef, whoChatRef)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCustomerRepository(@CustomerReference ref: CollectionReference): CustomerRepository {
+        return CustomerRepositoryImpl(ref)
     }
 
 }

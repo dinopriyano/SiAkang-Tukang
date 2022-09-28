@@ -1,5 +1,6 @@
 package com.siakang.tukang.presentation.component.loading_button
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -95,6 +96,53 @@ fun LoadingButton(
     }
 }
 
+@Composable
+fun OutlinedLoadingButton(
+    text: String,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {},
+    enabled: Boolean = true,
+    loading: Boolean = false,
+    colors: Color = Primary,
+    loadingIndicatorType: LoadingIndicatorTypes = LoadingIndicatorTypes.Pulsing,
+) {
+
+    // The default material button colors use a shade of gray
+    // for the disabled state. These buttons instead use
+    // an alpha on the primary color.
+    // If you want to use a different overall button color, just
+    // change the `buttonColor` variable below. Or, for even more flexibility,
+    // allow the caller to pass in a `buttonColor`.
+
+    val buttonColors = ButtonDefaults.buttonColors(
+        containerColor = Color.Transparent,
+        contentColor = colors,
+        disabledContainerColor = Color.White.copy(alpha = DISABLED_BUTTON_ALPHA),
+        disabledContentColor = colors.copy(alpha = DISABLED_BUTTON_ALPHA)
+    )
+
+    Button(
+        modifier = modifier,
+        colors = buttonColors,
+        shape = buttonShape,
+        border = BorderStroke(1.dp, colors),
+        contentPadding = buttonContentPadding,
+        enabled = enabled && !loading,
+        onClick = {
+            if(enabled && !loading) {
+                onClick.invoke()
+            }
+        }
+    ) {
+
+        MyButtonContent(
+            text = text,
+            loading = loading,
+            loadingIndicatorType = loadingIndicatorType,
+            indicatorColor = colors
+        )
+    }
+}
 /**
  * Renders the content in a Solid or Outlined button.
  *
@@ -108,7 +156,8 @@ fun LoadingButton(
 private fun MyButtonContent(
     text: String,
     loading: Boolean,
-    loadingIndicatorType: LoadingIndicatorTypes
+    loadingIndicatorType: LoadingIndicatorTypes,
+    indicatorColor: Color = Color.White
 ) {
 
     // Use a Custom Layout so that we can measure the width of both the
@@ -121,14 +170,14 @@ private fun MyButtonContent(
             // Content is the Text and the LoadingIndicator
             Text(
                 text = text,
-                color = Color.White,
+                color = indicatorColor,
                 modifier = Modifier.layoutId("buttonText"),
                 style = MaterialTheme.typography.labelMedium
             )
             LoadingIndicator(
                 type = loadingIndicatorType,
                 modifier = Modifier.layoutId("loadingIndicator"),
-                color = Color.White
+                color = indicatorColor
             )
         }) { measureables, constraints ->
 

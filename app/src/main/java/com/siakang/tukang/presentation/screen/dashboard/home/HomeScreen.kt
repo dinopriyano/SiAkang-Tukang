@@ -39,10 +39,9 @@ import com.siakang.tukang.utils.ext.getFirstName
 @ExperimentalMaterial3Api
 @Composable
 fun HomeScreen(
-    navController: NavHostController,
+    parentNavController: NavHostController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
-
     viewModel.getUser()
     val pagerState = rememberPagerState()
     var user by remember {
@@ -163,7 +162,7 @@ fun HomeScreen(
         TabsContent(
             tabs = TabItem.Items.items,
             pagerState = pagerState,
-            navController = navController
+            parentNavController = parentNavController
         )
     }
 }

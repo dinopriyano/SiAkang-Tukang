@@ -21,3 +21,15 @@ annotation class ProductReference
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class OrderReference
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class ChatReference
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class WhoChatReference
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class CustomerReference

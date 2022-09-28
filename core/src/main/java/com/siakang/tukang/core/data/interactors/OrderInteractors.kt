@@ -1,7 +1,10 @@
 package com.siakang.tukang.core.data.interactors
 
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.DocumentSnapshot
 import com.siakang.tukang.core.data.model.Resource
 import com.siakang.tukang.core.domain.model.Order
+import com.siakang.tukang.core.domain.model.Tukang
 import com.siakang.tukang.core.domain.repository.OrderRepository
 import com.siakang.tukang.core.domain.usecase.OrderUseCase
 import kotlinx.coroutines.Dispatchers
@@ -46,6 +49,64 @@ class OrderInteractors(
             awaitClose {
                 snapshotListener.remove()
             }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getOrderDetail(id: String): Flow<Resource<Order>> {
+        return callbackFlow {
+            repo.getOrderDetail(id).addOnCompleteListener { task: Task<DocumentSnapshot> ->
+                trySend(
+                    if(task.isSuccessful) {
+                        val order = task.result.toObject(Order::class.java)
+                        if(order != null) {
+                            Resource.Success(order)
+                        }
+                        else {
+                            Resource.Failure("Ups, terjadi kesalahan!")
+                        }
+                    }
+                    else {
+                        Resource.Failure(task.exception?.localizedMessage ?: "Ups, something error!")
+                    }
+                )
+            }
+            awaitClose()
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun acceptOrder(orderId: String, tukang: Tukang): Flow<Resource<Unit>> {
+        return callbackFlow {
+            repo.acceptOrder(orderId, tukang).addOnCompleteListener { task ->
+                trySend(
+                    if(task.isSuccessful) {
+                        Resource.Success(Unit)
+                    }
+                    else {
+                        Resource.Failure(task.exception?.localizedMessage ?: "Ups, something error!")
+                    }
+                )
+            }
+            awaitClose()
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun rejectOrder(orderId: String, tukang: Tukang): Flow<Resource<Unit>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun completeOrder(orderId: String): Flow<Resource<Unit>> {
+        return callbackFlow {
+            repo.completeOrder(orderId).addOnCompleteListener { task ->
+                trySend(
+                    if(task.isSuccessful) {
+                        Resource.Success(Unit)
+                    }
+                    else {
+                        Resource.Failure(task.exception?.localizedMessage ?: "Ups, something error!")
+                    }
+                )
+            }
+            awaitClose()
         }.flowOn(Dispatchers.IO)
     }
 }

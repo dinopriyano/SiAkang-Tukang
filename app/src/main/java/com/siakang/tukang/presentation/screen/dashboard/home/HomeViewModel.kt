@@ -1,6 +1,5 @@
 package com.siakang.tukang.presentation.screen.dashboard.home
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.siakang.tukang.core.data.model.Resource
 import com.siakang.tukang.core.domain.model.Order
@@ -12,7 +11,6 @@ import com.siakang.tukang.core.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -56,7 +54,6 @@ class HomeViewModel @Inject constructor(
     fun getOrderActive() {
         viewModelScope.launch {
             _orderActiveResponse.trySend(Resource.Loading)
-            Log.i("Kontol", "getOrderActive: ${dataStoreUseCase.getUid().first()}")
             orderUseCase.getActiveOrder(dataStoreUseCase.getUid().first()).collect { result ->
                 _orderActiveResponse.trySend(result)
             }

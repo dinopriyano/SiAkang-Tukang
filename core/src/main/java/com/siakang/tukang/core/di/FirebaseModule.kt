@@ -7,10 +7,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
-import com.siakang.tukang.core.di.qualifier.CategoryReference
-import com.siakang.tukang.core.di.qualifier.OrderReference
-import com.siakang.tukang.core.di.qualifier.ProductReference
-import com.siakang.tukang.core.di.qualifier.UserReference
+import com.siakang.tukang.core.di.qualifier.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -70,5 +67,26 @@ object FirebaseModule {
     fun provideOrderReference(
         db: FirebaseFirestore
     ) = db.collection("order")
+
+    @Singleton
+    @Provides
+    @ChatReference
+    fun provideChatReference(
+        db: FirebaseFirestore
+    ) = db.collection("chat")
+
+    @Singleton
+    @Provides
+    @WhoChatReference
+    fun provideWhoChatReference(
+        db: FirebaseFirestore
+    ) = db.collection("who_chat")
+
+    @Singleton
+    @Provides
+    @CustomerReference
+    fun provideCustomerReference(
+        db: FirebaseFirestore
+    ) = db.collection("users")
 
 }

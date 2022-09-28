@@ -49,4 +49,16 @@ object UseCaseModule {
         return OrderInteractors(repository)
     }
 
+    @Singleton
+    @Provides
+    fun provideChatUseCase(repository: ChatRepository): ChatUseCase {
+        return ChatInteractors(repository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCustomerUseCase(repository: CustomerRepository): CustomerUseCase {
+        return CustomerInteractors(repository)
+    }
+
 }

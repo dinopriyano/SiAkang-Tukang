@@ -16,25 +16,26 @@ import com.siakang.tukang.presentation.screen.dashboard.profile.ProfileScreen
 @ExperimentalAnimationApi
 @Composable
 fun DashboardScreenController(
-    navController: NavHostController
+    navController: NavHostController,
+    parentNavController: NavHostController
 ) {
     NavHost(navController = navController, startDestination = "home") {
         composable(
             route = "home"
         ) {
-            HomeScreen(navController)
+            HomeScreen(parentNavController)
         }
 
         composable(
             route = "chat"
         ) {
-            ChatScreen(navController)
+            ChatScreen(parentNavController)
         }
 
         composable(
             route = "profile"
         ) {
-            ProfileScreen(navController)
+            ProfileScreen(parentNavController)
         }
     }
 }
