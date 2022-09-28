@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.navArgument
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
@@ -26,6 +27,7 @@ import com.siakang.tukang.presentation.screen.data_completion.file_upload.FileUp
 import com.siakang.tukang.presentation.screen.data_completion.personal_information.PersonalInformationScreen
 import com.siakang.tukang.presentation.screen.data_completion.skill.SkillScreen
 import com.siakang.tukang.presentation.screen.edit_profile.EditProfileScreen
+import com.siakang.tukang.presentation.screen.image_detail.ImageDetailScreen
 import com.siakang.tukang.presentation.screen.login.LoginScreen
 import com.siakang.tukang.presentation.screen.order_detail.OfferDetailScreen
 import com.siakang.tukang.presentation.screen.pending_verification.PendingVerificationScreen
@@ -278,6 +280,24 @@ class MainActivity : ComponentActivity() {
                         }
                     ) {
                         EditProfileScreen(navController)
+                    }
+                    composable(
+                        route = "image_detail?imageUrl={imageUrl}",
+                        arguments = listOf(navArgument("imageUrl") { defaultValue = "" }),
+                        enterTransition = {
+                            slideIntoContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(300))
+                        },
+                        exitTransition = {
+                            slideOutOfContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(300))
+                        },
+                        popEnterTransition = {
+                            slideIntoContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(300))
+                        },
+                        popExitTransition = {
+                            slideOutOfContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(300))
+                        }
+                    ) { backStackEntry ->
+                        ImageDetailScreen(navController = navController, imageUrl = backStackEntry.arguments?.getString("imageUrl"))
                     }
                 }
             }

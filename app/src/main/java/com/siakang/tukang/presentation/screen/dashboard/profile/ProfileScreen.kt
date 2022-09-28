@@ -157,7 +157,8 @@ fun ProfileScreen(
                 icon = painterResource(id = R.drawable.ic_leave),
                 name = "Logout"
             ) {
-
+                viewModel.clearLoginSession()
+                parentNavController.navigate("login")
             }
         }
     }

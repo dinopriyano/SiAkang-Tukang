@@ -40,4 +40,10 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
+    fun clearLoginSession() {
+        viewModelScope.launch {
+            dataStoreUseCase.clear()
+        }
+    }
+
 }

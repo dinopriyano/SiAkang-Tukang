@@ -24,4 +24,5 @@
     <string name="choose_list">Pilih Keahlian</string>
     <string name="send">Kirim</string>
     <string name="home">Beranda</string>
+    <string name="save">Simpan</string>
 </resources>

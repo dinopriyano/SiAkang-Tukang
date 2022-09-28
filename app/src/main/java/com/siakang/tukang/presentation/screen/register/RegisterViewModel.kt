@@ -169,7 +169,6 @@ class RegisterViewModel @Inject constructor(
                     areDataComplete = false
                 )
             ).collect { result ->
-                Log.i("Kontol", "saveUser: $result")
                 _saveResponse.send(result)
             }
         }

@@ -140,8 +140,10 @@ fun OfferDetailScreen(
                         .padding(30.dp, 8.dp, 30.dp, 0.dp),
                     imageColor = Secondary,
                     imageUri = fileUri.toUri(),
-                    imageName = "Foto Masalah ${index + 1}"
-                )
+                    imageName = "Foto Masalah ${index + 1}",
+                ) { uri ->
+                    navController.navigate("image_detail?imageUrl=$uri")
+                }
             }
             TitleDescription(
                 title = "Catatan Tambahan",

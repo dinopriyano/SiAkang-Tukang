@@ -155,15 +155,19 @@ fun RegistrationDetailScreen(
                     imageColor = Secondary,
                     imageUri = user.photoProfile.orEmpty().toUri(),
                     imageName = "Photo Profile"
-                )
+                ) { uri ->
+                    navController.navigate("image_detail?imageUrl=$uri")
+                }
                 FilePreview(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(18.dp, 8.dp, 18.dp, 0.dp),
                     imageColor = Primary,
                     imageUri = user.idCard.orEmpty().toUri(),
-                    imageName = "Kartu Tanda Penduduk"
-                )
+                    imageName = "Kartu Tanda Penduduk",
+                ){ uri ->
+                    navController.navigate("image_detail?imageUrl=$uri")
+                }
                 FilePreview(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -171,7 +175,9 @@ fun RegistrationDetailScreen(
                     imageColor = Header,
                     imageUri = user.skck.orEmpty().toUri(),
                     imageName = "Surat Keterangan Catatan Kepolisian"
-                )
+                ){ uri ->
+                    navController.navigate("image_detail?imageUrl=$uri")
+                }
                 Text(
                     modifier = Modifier
                         .fillMaxWidth()
