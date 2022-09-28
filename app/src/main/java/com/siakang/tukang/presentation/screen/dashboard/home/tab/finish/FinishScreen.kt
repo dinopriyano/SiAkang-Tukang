@@ -1,4 +1,4 @@
-package com.siakang.tukang.presentation.screen.dashboard.home.tab.active
+package com.siakang.tukang.presentation.screen.dashboard.home.tab.finish
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,12 +18,12 @@ import com.siakang.tukang.presentation.component.order_item.OrderActiveItem
 import com.siakang.tukang.presentation.screen.dashboard.home.HomeViewModel
 
 @Composable
-fun ActiveScreen(
+fun FinishScreen(
     parentNavController: NavHostController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
-    viewModel.getOrderActive()
-    val orderResponse by viewModel.orderActiveResponse.collectAsState(initial = Resource.Empty)
+    viewModel.getOrderFinish()
+    val orderResponse by viewModel.orderFinishResponse.collectAsState(initial = Resource.Empty)
     var orders by remember {
         mutableStateOf(listOf<Order>())
     }

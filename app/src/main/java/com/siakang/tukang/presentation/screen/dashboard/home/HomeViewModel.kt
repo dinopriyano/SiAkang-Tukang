@@ -1,5 +1,6 @@
 package com.siakang.tukang.presentation.screen.dashboard.home
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.siakang.tukang.core.data.model.Resource
 import com.siakang.tukang.core.domain.model.Order
@@ -30,6 +31,8 @@ class HomeViewModel @Inject constructor(
     val orderOfferResponse: Flow<Resource<List<Order>>> get() = _orderOfferResponse.receiveAsFlow()
     private val _orderActiveResponse = Channel<Resource<List<Order>>>(Channel.CONFLATED)
     val orderActiveResponse: Flow<Resource<List<Order>>> get() = _orderActiveResponse.receiveAsFlow()
+    private val _orderFinishResponse = Channel<Resource<List<Order>>>(Channel.CONFLATED)
+    val orderFinishResponse: Flow<Resource<List<Order>>> get() = _orderFinishResponse.receiveAsFlow()
 
     fun getUser() {
         viewModelScope.launch {
@@ -55,7 +58,18 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             _orderActiveResponse.trySend(Resource.Loading)
             orderUseCase.getActiveOrder(dataStoreUseCase.getUid().first()).collect { result ->
+                Log.i("Babik", "getOrderActive: $result")
                 _orderActiveResponse.trySend(result)
+            }
+        }
+    }
+
+    fun getOrderFinish() {
+        viewModelScope.launch {
+            _orderFinishResponse.trySend(Resource.Loading)
+            orderUseCase.getFinishOrder(dataStoreUseCase.getUid().first()).collect { result ->
+                Log.i("Babik", "getOrderFinish: $result")
+                _orderFinishResponse.trySend(result)
             }
         }
     }

@@ -52,6 +52,24 @@ class OrderInteractors(
         }.flowOn(Dispatchers.IO)
     }
 
+    override suspend fun getFinishOrder(tukangId: String): Flow<Resource<List<Order>>> {
+        return callbackFlow {
+            val snapshotListener = repo.getFinishOrder(tukangId).addSnapshotListener { value, error ->
+                val response = if (value != null) {
+                    val orders = value.toObjects(Order::class.java)
+                    Resource.Success(orders)
+                } else {
+                    Resource.Failure(error?.message ?: error.toString())
+                }
+                trySend(response)
+            }
+
+            awaitClose {
+                snapshotListener.remove()
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
     override suspend fun getOrderDetail(id: String): Flow<Resource<Order>> {
         return callbackFlow {
             repo.getOrderDetail(id).addOnCompleteListener { task: Task<DocumentSnapshot> ->

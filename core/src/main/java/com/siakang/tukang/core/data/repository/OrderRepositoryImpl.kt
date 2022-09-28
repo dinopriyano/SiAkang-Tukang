@@ -16,7 +16,11 @@ class OrderRepositoryImpl(
     }
 
     override suspend fun getActiveOrder(tukangId: String): Query {
-        return ref.whereEqualTo("tukangId", tukangId).orderBy("orderDate").limit(10)
+        return ref.whereEqualTo("tukangId", tukangId).whereEqualTo("complete", false).orderBy("orderDate").limit(10)
+    }
+
+    override suspend fun getFinishOrder(tukangId: String): Query {
+        return ref.whereEqualTo("tukangId", tukangId).whereEqualTo("complete", true).orderBy("orderDate").limit(10)
     }
 
     override suspend fun getOrderDetail(id: String): Task<DocumentSnapshot> {

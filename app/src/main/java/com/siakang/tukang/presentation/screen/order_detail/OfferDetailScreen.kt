@@ -179,7 +179,7 @@ fun OfferDetailScreen(
                                     viewModel.completeOrder(it)
                                 }
                             },
-                            enabled = true,
+                            enabled = !orderDetail.complete,
                             loading = completeOrder is Resource.Loading
                         )
                     }

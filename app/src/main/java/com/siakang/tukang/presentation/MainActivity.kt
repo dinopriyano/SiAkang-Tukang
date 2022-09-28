@@ -25,6 +25,7 @@ import com.siakang.tukang.presentation.screen.data_completion.bank.BankInformati
 import com.siakang.tukang.presentation.screen.data_completion.file_upload.FileUploadScreen
 import com.siakang.tukang.presentation.screen.data_completion.personal_information.PersonalInformationScreen
 import com.siakang.tukang.presentation.screen.data_completion.skill.SkillScreen
+import com.siakang.tukang.presentation.screen.edit_profile.EditProfileScreen
 import com.siakang.tukang.presentation.screen.login.LoginScreen
 import com.siakang.tukang.presentation.screen.order_detail.OfferDetailScreen
 import com.siakang.tukang.presentation.screen.pending_verification.PendingVerificationScreen
@@ -260,6 +261,23 @@ class MainActivity : ComponentActivity() {
                         }
                     ) { backStackEntry ->
                         ChatScreen(navController, backStackEntry.arguments?.getString("friendId"))
+                    }
+                    composable(
+                        route = "edit_profile",
+                        enterTransition = {
+                            slideIntoContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(300))
+                        },
+                        exitTransition = {
+                            slideOutOfContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(300))
+                        },
+                        popEnterTransition = {
+                            slideIntoContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(300))
+                        },
+                        popExitTransition = {
+                            slideOutOfContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(300))
+                        }
+                    ) {
+                        EditProfileScreen(navController)
                     }
                 }
             }
